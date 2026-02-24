@@ -1,8 +1,6 @@
 # About
 A minimalist, highly customizable startpage.
 
-This is a personal project built for my own workflow. You are welcome to use it, but please keep in mind that it is tailored to my needs and you may encounter bugs or configuration issues.
-
 ## 🚀 Usage
 To use this as your default new tab page, install one of the following extensions and point it to the live URL:
 
