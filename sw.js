@@ -1,4 +1,4 @@
-const CACHE_NAME = 'anoxle-startpage-v0.011-5b';
+const CACHE_NAME = 'anoxle-startpage-v0.011-12b';
 const SHELL_ASSETS = [
   './',
   './index.html',
