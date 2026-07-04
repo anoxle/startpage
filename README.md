@@ -13,6 +13,9 @@ To use this as your default new tab page, install one of the following extension
 - **Chrome / Brave / Edge / etc:** Use [New Tab Redirect](https://chromewebstore.google.com/detail/new-tab-redirect/icpgjfneehieebagbmdbhnlpiopdcmna)
 - **Firefox / Zen / Waterfox / etc:** Use [New Tab Override](https://addons.mozilla.org/en-US/firefox/addon/new-tab-override/)
 
+⚠️ **Note on Opera / Opera GX**
+Extensions listed above are untested on Opera / Opera GX. Other third-party extensions are not recommended; install with caution!
+
 ---
 
 ## 📸 Preview
