@@ -1,0 +1,163 @@
+{
+  "theme": "theme-dark",
+  "accent": "#89dceb",
+  "colors": {
+    "bg": "#182026",
+    "text": "#cdd6f4",
+    "accent": "#89dceb",
+    "border": "#2a3742"
+  },
+  "bgUrl": "https://anoxle.github.io/resources/startpage/public-wallpapers/karsten-wurth-7BjhtdogU3A-unsplash.jpg",
+  "bgBlur": 2,
+  "bgDark": 25,
+  "bgType": "upload",
+  "bgData": "",
+  "bgSize": "cover",
+  "bgPosX": 50,
+  "bgPosY": 50,
+  "hidehelp": false,
+  "hideprefbtn": false,
+  "autofocus": true,
+  "tabName": "New Tab",
+  "tabIcon": "https://anoxle.github.io/startpage/icon.png",
+  "engine": "https://www.google.com/search?q=%s",
+  "custengine": "",
+  "forceSearchKey": "Tab",
+  "forceSearchMode": false,
+  "widgetPos": {
+    "top": 38.324552160168594,
+    "left": 50,
+    "w": "auto",
+    "h": "auto"
+  },
+  "searchPos": {
+    "top": 52.42360379346681,
+    "left": 50,
+    "w": 750,
+    "h": "auto"
+  },
+  "qlPos": {
+    "top": 60.94625922023182,
+    "left": 50,
+    "w": 640,
+    "h": "auto"
+  },
+  "clockStyle": "basic",
+  "clockScale": 100,
+  "clockSpacing": -2,
+  "clockGlow": 0,
+  "clockWeight": "700",
+  "clockFont": "system",
+  "clockAlign": "center",
+  "dateFormat": "short",
+  "clockShowDate": true,
+  "clock24h": false,
+  "clockShowSeconds": true,
+  "clockShowGreet": true,
+  "clockBlink": false,
+  "clockTextColor": "#ffffff",
+  "dateTextColor": "#e0e6ed",
+  "greetTextColor": "#ffffff",
+  "searchW": 710,
+  "searchRadius": 14,
+  "searchFont": 19,
+  "searchPad": 16,
+  "searchBorderW": 1,
+  "searchBlur": 0,
+  "searchShadow": 10,
+  "searchOpacity": 100,
+  "searchStyle": "custom",
+  "searchPlaceholder": "Ask anything...",
+  "searchShowHint": true,
+  "searchShowNav": true,
+  "searchShowArrow": true,
+  "openSearchNewTab": false,
+  "searchTextColor": "",
+  "searchBgCustom": "",
+  "containerColorMode": "default",
+  "containerBg": "",
+  "containerBorder": "",
+  "fxactive": false,
+  "fxpreset": "glow",
+  "fxcolor": "#89dceb",
+  "fxsize": 20,
+  "useai": true,
+  "aiurl": "https://search.brave.com/ask?q={query}",
+  "custaiurl": "",
+  "aikey": "a",
+  "qlStyle": "pill",
+  "qlScale": 100,
+  "qlGap": 12,
+  "qlIcon": 18,
+  "qlRadius": 12,
+  "qlPad": 10,
+  "qlShow": true,
+  "qlShowText": true,
+  "qlShowIcons": true,
+  "qlHover": "lift",
+  "qlLayout": "flex",
+  "openLinksNewTab": false,
+  "quickLinks": [
+    {
+      "name": "YouTube",
+      "url": "https://www.youtube.com",
+      "icon": ""
+    },
+    {
+      "name": "Gmail",
+      "url": "https://mail.google.com",
+      "icon": ""
+    },
+    {
+      "name": "GitHub",
+      "url": "https://github.com",
+      "icon": ""
+    },
+    {
+      "name": "ChatGPT",
+      "url": "https://chatgpt.com",
+      "icon": ""
+    }
+  ],
+  "favorites": [
+    "gmail.com",
+    "youtube.com",
+    "github.com",
+    "reddit.com"
+  ],
+  "useatts": true,
+  "groups": [
+    {
+      "name": "Search Engines",
+      "collapsed": false,
+      "items": [
+        {
+          "key": "g",
+          "name": "Google",
+          "url": "https://www.google.com/search?q=%s",
+          "icon": ""
+        },
+        {
+          "key": "b",
+          "name": "Bing",
+          "url": "https://www.bing.com/search?q=%s",
+          "icon": ""
+        }
+      ]
+    },
+    {
+      "name": "AI",
+      "collapsed": false,
+      "items": [
+        {
+          "key": "gpt",
+          "name": "ChatGPT",
+          "url": "https://chatgpt.com/?q=%s",
+          "icon": ""
+        }
+      ]
+    }
+  ],
+  "iconApi": "google",
+  "iconApiFallback": true
+}

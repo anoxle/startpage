@@ -1,11 +1,13 @@
-const CACHE_NAME = 'anoxle-startpage-v0.020-5b';
+const CACHE_NAME = 'anoxle-startpage-v0.100';
+
 const SHELL_ASSETS = [
   './',
   './index.html',
-  './app.js',
-  './app.css'
+  './assets/app.js',
+  './assets/app.css',
+  './icon.png',
+  './manifest.json'
 ];
-SHELL_ASSETS.push('./icon.png', './manifest.json');
 
 self.addEventListener('install', e => {
   e.waitUntil(
@@ -40,7 +42,7 @@ function handleFetch(e) {
         return fetch(req).then(res => {
           if (!res || res.status !== 200 || res.type === 'opaque') return res;
           const clone = res.clone();
-            caches.open(CACHE_NAME).then(c => c.put(req, clone));
+          caches.open(CACHE_NAME).then(c => c.put(req, clone));
           return res;
         });
       })
