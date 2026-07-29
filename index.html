@@ -151,10 +151,10 @@
    </div>
 
    <div class="tab-pane" id="tab-search">
-    <div class="set-card">
-     <label class="set-label">Search Engine</label>
-     <span class="field-label">Default Search Provider</span>
-     <select id="pref-engine" style="margin-bottom:10px"></select>
+   <div class="set-card">
+    <label class="set-label">Search Engine</label>
+    <span class="field-label">Default Search Provider</span>
+    <select id="pref-engine" style="margin-bottom:10px"></select>
      <p style="font-size:.8rem;color:var(--hint);margin-top:2px;margin-bottom:12px;">The shield icon indicates the search engine respects your privacy.</p>
      <div id="box-cust-engine-wrapper" style="display:none"><span class="field-label">Custom Search URL (%s = query)</span><input type="text" id="pref-custengine" placeholder="https://example.com/search?q=%s"></div>
      <div class="flex-row" style="margin-top:12px; flex-wrap:wrap;">
@@ -163,30 +163,38 @@
         <select id="pref-forcekey" style="width:120px"><option value="Tab">Tab</option><option value="Shift">Shift</option><option value="Control">Ctrl</option><option value="Alt">Alt</option></select>
      </div>
     </div>
-    <div class="set-card">
-     <label class="set-label">AI Search</label>
-     <div class="toggle-row"><span>Enable AI Search</span><label class="switch"><input type="checkbox" id="pref-useai"><span class="slider"></span></label></div>
-     <div id="box-ai" style="margin-top:12px; display:none;">
-        <span class="field-label">AI Platform</span>
-        <select id="pref-aiurl" style="width:300px; margin-bottom:4px;">
-            <option value="https://search.brave.com/ask?q={query}">Brave Leo (5/10)</option>
-            <option value="custom">Custom</option>
-        </select>
-        <p style="font-size:.75rem; color:var(--hint); margin:4px 0 24px; line-height:1.4;">Ratings are based on how good the models on each platform is against everyday questions.</p>
-        <div id="box-cust-ai-wrapper" style="display:none; margin-bottom:24px;">
-            <span class="field-label">Custom AI URL Pattern</span>
-            <input type="text" id="pref-custaiurl" placeholder="https://custom-ai.com/chat?q={query}">
-            <p style="font-size:.75rem; color:var(--hint); margin:4px 0 0; line-height:1.4;">Where the query should be add {query} or %s or {msg}</p>
-        </div>
-        <div style="margin-bottom:24px;">
-            <span class="field-label">Shortcut Key</span>
-            <div class="flex-row" style="margin-bottom:0; flex-wrap:wrap;">
-                <input type="text" id="pref-aikey" maxlength="1" style="width:60px; text-align:center" placeholder="a">
-                <p id="ai-shortcut-desc" style="font-size:.8rem; color:var(--hint); margin:0; flex:1 1 100%; margin-top:8px;">Shortcut to open the AI platform with your query. It is currently: <strong>Alt+a</strong></p>
-            </div>
-        </div>
-     </div>
+   <div class="set-card">
+    <label class="set-label">AI Search</label>
+    <div class="toggle-row"><span>Enable AI Search</span><label class="switch"><input type="checkbox" id="pref-useai"><span class="slider"></span></label></div>
+    <div id="box-ai" style="margin-top:12px; display:none;">
+       <div class="flex-row" style="align-items:flex-start; gap:16px; flex-wrap:wrap;">
+          <div style="flex:1 1 300px;">
+             <span class="field-label">AI Platform</span>
+             <select id="pref-aiurl" style="width:100%; margin-bottom:4px;">
+                 <option value="https://search.brave.com/ask?q={query}">Brave Leo ⭐</option>
+                 <option value="https://claude.ai/new?q=%s">Claude ⭐</option>
+                 <option value="https://www.perplexity.ai/search?q=%s">Perplexity</option>
+                 <option value="https://chatgpt.com/?q=%s">ChatGPT</option>
+                 <option value="custom">Custom</option>
+             </select>
+             <p style="font-size:.75rem; color:var(--hint); margin:4px 0 0; line-height:1.4;">Starred means recommended or popular</p>
+          </div>
+          <div style="flex:0 0 auto;">
+             <span class="field-label">Shortcut Key</span>
+             <div class="flex-row" style="margin-bottom:0; gap:8px; align-items:center;">
+                 <strong style="color:var(--subtext); font-size:.9rem;">Alt +</strong>
+                 <input type="text" id="pref-aikey" maxlength="1" style="width:50px; text-align:center" placeholder="a">
+             </div>
+             <p id="ai-shortcut-desc" style="font-size:.75rem; color:var(--hint); margin:4px 0 0; line-height:1.4;">Shortcut to open AI with query.</p>
+          </div>
+       </div>
+       <div id="box-cust-ai-wrapper" style="display:none; margin-top:16px;">
+           <span class="field-label">Custom AI URL Pattern</span>
+           <input type="text" id="pref-custaiurl" placeholder="https://custom-ai.com/chat?q={query}">
+           <p style="font-size:.75rem; color:var(--hint); margin:4px 0 0; line-height:1.4;">Where the query should be add {query} or %s or {msg}</p>
+       </div>
     </div>
+   </div>
     <div class="set-card">
      <label class="set-label">Autocomplete Favorites</label>
      <span class="field-label">Domain Address Entry URL String</span>
@@ -305,12 +313,12 @@
 
    <div class="tab-pane" id="tab-short">
     <div class="set-card">
-     <label class="set-label">Custom Shortcuts (@key)</label>
+     <label class="set-label">Atts (@key)</label>
      <p style="font-size:.85rem; color:var(--subtext); margin-top:-8px; margin-bottom:16px;">Type @ followed by your key in the search bar to quickly swap search engines or open links.</p>
      <div class="toggle-row"><span>Enable Custom Shortcuts</span><label class="switch"><input type="checkbox" id="pref-useatts"><span class="slider"></span></label></div>
      <div id="box-atts" style="display:none; margin-top:16px;">
-        <div id="list-grps" class="list-wrap" style="max-height:400px"></div>
-        <button class="btn" data-action="addGrp">+ Add Group</button>
+     <div id="list-grps" class="list-wrap" style="max-height:400px"></div>
+     <button class="add-ghost" data-action="addGrp"><i class="fa-solid fa-plus"></i> Add Group</button>
      </div>
     </div>
    </div>
