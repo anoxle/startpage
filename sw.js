@@ -1,4 +1,4 @@
-const CACHE_NAME = 'anoxle-startpage-v1785923522984';
+const CACHE_NAME = 'anoxle-startpage-v1785924473740';
 const SHELL_ASSETS = ["./","./index.html","./assets/app.js","./assets/app.css"];
 
 self.addEventListener('install', e => {

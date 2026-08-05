@@ -570,8 +570,26 @@
 
 <script>
     if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('./sw.js');
+        navigator.serviceWorker.register('/sw.js', { updateViaCache: 'none' }).then(reg => {
+            const check = () => reg.update();
+            setInterval(check, 60 * 1000);
+            document.addEventListener('visibilitychange', () => !document.hidden && check());
+
+            reg.addEventListener('updatefound', () => {
+                const nw = reg.installing;
+                nw.addEventListener('statechange', () => {
+                    if (nw.state === 'installed' && navigator.serviceWorker.controller) {
+                        nw.postMessage({ type: 'SKIP_WAITING' });
+                    }
+                });
+            });
+        });
+
+        let refreshed = false;
+        navigator.serviceWorker.addEventListener('controllerchange', () => {
+            if (refreshed) return;
+            refreshed = true;
+            location.reload();
         });
     }
 </script>
