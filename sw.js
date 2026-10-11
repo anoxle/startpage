@@ -1,34 +1,67 @@
-const CACHE_NAME = 'anoxle-startpage-v1785924473740';
-const SHELL_ASSETS = ["./","./index.html","./assets/app.js","./assets/app.css"];
+const CACHE_NAME = 'anoxle-startpage-v2026.10.11.123317';
+const FONT_CACHE = 'anoxle-fonts-v1';
+const SHELL_ASSETS = ["./","./index.html","./assets/app.js","./assets/app.css","./assets/fonts/google-fonts.css","./assets/fonts/font-awesome.css","./assets/fonts/tDbV2o-flEEny0FZhsfKu5WU4xD2OwG_TA.woff2","./assets/fonts/tDbV2o-flEEny0FZhsfKu5WU4xD_OwG_TA.woff2","./assets/fonts/tDbV2o-flEEny0FZhsfKu5WU4xD4OwG_TA.woff2","./assets/fonts/tDbV2o-flEEny0FZhsfKu5WU4xD0OwG_TA.woff2","./assets/fonts/tDbV2o-flEEny0FZhsfKu5WU4xD1OwG_TA.woff2","./assets/fonts/tDbV2o-flEEny0FZhsfKu5WU4xD7OwE.woff2","./assets/fonts/V8mDoQDjQSkFtoMM3T6r8E7mPb54C-s0.woff2","./assets/fonts/V8mDoQDjQSkFtoMM3T6r8E7mPb94C-s0.woff2","./assets/fonts/V8mDoQDjQSkFtoMM3T6r8E7mPbF4Cw.woff2","./assets/fonts/8vIH7w4qzmVxm2NL9Hz_.woff2","./assets/fonts/8vIH7w4qzmVxm25L9Hz_.woff2","./assets/fonts/8vIH7w4qzmVxm2BL9A.woff2","./assets/fonts/fa-brands-400.woff2","./assets/fonts/fa-brands-400.ttf","./assets/fonts/fa-regular-400.woff2","./assets/fonts/fa-regular-400.ttf","./assets/fonts/fa-solid-900.woff2","./assets/fonts/fa-solid-900.ttf","./assets/fonts/fa-v4compatibility.woff2","./assets/fonts/fa-v4compatibility.ttf","./icon.png","./assets/icon.png","./manifest.json","./assets/manifest.json","./default.json","./default-mobile.json"];
+const REQUIRED = ['./index.html', './assets/app.js', './default.json'];
+const BYPASS = ['version.txt', 'sw.js'];
 
 self.addEventListener('install', e => {
-  e.waitUntil(caches.open(CACHE_NAME).then(c => c.addAll(SHELL_ASSETS)).then(() => self.skipWaiting()));
+  e.waitUntil(caches.open(CACHE_NAME).then(cache => Promise.all(SHELL_ASSETS.map(path =>
+    fetch(new Request(path, { cache: 'reload' })).then(res => {
+      if (!res.ok) throw new Error(path + ' ' + res.status);
+      return cache.put(path, res);
+    }).catch(err => {
+      if (REQUIRED.includes(path)) throw err;
+    })
+  ))));
 });
+
+self.addEventListener('message', e => {
+  if (e.data && e.data.type === 'SKIP_WAITING') self.skipWaiting();
+});
+
 self.addEventListener('activate', e => {
-  e.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k => k!== CACHE_NAME).map(k => caches.delete(k)))).then(() => self.clients.claim()));
+  e.waitUntil(
+    caches.keys()
+      .then(keys => Promise.all(keys.filter(k => k !== CACHE_NAME && k !== FONT_CACHE).map(k => caches.delete(k))))
+      .then(() => self.clients.claim())
+  );
 });
+
+function store(e, cacheName, req, res) {
+  if (res.ok) {
+    const clone = res.clone();
+    e.waitUntil(caches.open(cacheName).then(c => c.put(req, clone)));
+  }
+}
+
 self.addEventListener('fetch', e => {
   const req = e.request;
   const url = new URL(req.url);
-  if (req.method!== 'GET' || url.pathname.includes('sw.js')) return;
+  if (req.method !== 'GET') return;
+  if (url.origin === self.location.origin && BYPASS.some(n => url.pathname.endsWith('/' + n))) return;
+  if (url.searchParams.has('reset')) return;
 
-  if (url.pathname.includes('/assets/fonts/') || req.destination === 'font') {
+  const isFontFile = url.pathname.includes('/assets/fonts/') && !url.pathname.endsWith('.css');
+  if (isFontFile || req.destination === 'font') {
     e.respondWith(caches.match(req).then(cached => cached || fetch(req).then(res => {
-      if (res.ok) { const clone = res.clone(); caches.open(CACHE_NAME).then(c => c.put(req, clone)); }
+      store(e, FONT_CACHE, req, res);
       return res;
     })));
     return;
   }
+
   if (req.mode === 'navigate') {
-    e.respondWith(fetch(req).then(res => {
-      const clone = res.clone(); caches.open(CACHE_NAME).then(c => c.put(req, clone)); return res;
-    }).catch(() => caches.match(req).then(r => r || caches.match('./index.html'))));
+    e.respondWith(fetch(req, { cache: 'no-cache' }).then(res => {
+      store(e, CACHE_NAME, req, res);
+      return res;
+    }).catch(() => caches.match(req, { ignoreSearch: true }).then(r => r || caches.match('./index.html'))));
     return;
   }
+
   if (url.origin === self.location.origin) {
-    e.respondWith(caches.match(req).then(cached => cached || fetch(req).then(res => {
-      if (res.ok) { const clone = res.clone(); caches.open(CACHE_NAME).then(c => c.put(req, clone)); }
+    e.respondWith(fetch(req, { cache: 'no-cache' }).then(res => {
+      store(e, CACHE_NAME, req, res);
       return res;
-    })));
+    }).catch(() => caches.match(req)));
   }
 });
