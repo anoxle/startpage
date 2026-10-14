@@ -1,3 +1,5 @@
+> Please note that this is currently in preview, so you may encounter bugs and performance issues. These will be fixed in future updates, alongside improvements, and new features.
+
 ## About
 
 A highly customizable, beautiful new tab for your browser.
